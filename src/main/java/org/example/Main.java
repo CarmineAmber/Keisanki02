@@ -1,5 +1,7 @@
 package org.example;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,41 +13,41 @@ public class Main {
         Calculator calculator = new Calculator();
 
         try {
-            System.out.println("最初の数値を入力して下さい：");
-            double num1 = scanner.nextDouble();
+            System.out.println("１番目の数値を入力して下さい：");
+            BigDecimal num1 = scanner.nextBigDecimal();
 
-            System.out.println("次の数値を入力して下さい：");
-            double num2 = scanner.nextDouble();
+            System.out.println("２番目の数値を入力して下さい：");
+            BigDecimal num2 = scanner.nextBigDecimal();
 
             System.out.println("演算子を入力して下さい（+,-.*,/,%,^）：");
             char operator = scanner.next().charAt(0);
 
-            double result;
+            BigDecimal result;
 
             switch (operator) {
                 case '+':
-                    result = num1 + num2;
+                    result = num1.add(num2);
                     break;
                 case '-':
-                    result = num1 - num2;
+                    result = num1.subtract(num2);
                     break;
                 case '*':
-                    result = num1 * num2;
+                    result = num1.multiply(num2);
                     break;
                 case '/':
-                    result = num1 / num2;
+                    result = num1.divide(num2,4, RoundingMode.HALF_UP);
                     break;
                 case '%':
-                    result = num1 % num2;
+                    result = num1.remainder(num2);
                     break;
                 case '^':
-                    result = Math.pow(num1, num2);
+                    result = num1.pow(num2.intValueExact());
                     break;
                 default:
-                    throw new IllegalArgumentException("無効な演算子です。");
-            } System.out.println("結果：" + result);
+                    throw new IllegalArgumentException("演算子が無効です!");
+            } System.out.println("計算結果：" + result);
         }catch(InputMismatchException e){
-            System.out.println("無効な入力です。数値を入力して下さい");
+            System.out.println("数値を入力して下さい!");
         } catch (Exception e){
             System.out.println((e.getMessage()));
         }
