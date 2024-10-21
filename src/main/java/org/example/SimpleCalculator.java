@@ -106,7 +106,7 @@ public class SimpleCalculator extends JFrame{
                 break;
             case "/":
                 if (newOperand.compareTo(BigDecimal.ZERO) == 0) {
-                    textField.setText("0で割ることはできません。");
+                    textField.setText("0では割れません。");
                     return;
                 }
                 currentResult = currentResult.divide(newOperand, 15, RoundingMode.HALF_UP);
